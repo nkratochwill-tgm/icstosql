@@ -49,15 +49,14 @@ fun main(args: Array<String>) {
     bufferedwriter.close()
 }
 
+
 private fun add_everything_to_List() {
     if (!sqlliste.contains(insert_into_fach())) sqlliste.add(insert_into_fach())
-    klassen_und_lehrer.clear()
-
     for (i in 0 until klassen_und_lehrer.size - 1) {
         klasse = klassen_und_lehrer[i]
         if (!sqlliste.contains(insert_into_zuweisung())) sqlliste.add(insert_into_zuweisung())
     }
-
+    klassen_und_lehrer.clear()
 }
 
 private fun return_everything_after_colon(s: String) = s.split(":")[1]
