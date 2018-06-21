@@ -9,9 +9,8 @@ private var fach: String? = null
 private var klasse: String? = null
 private var klassen_und_lehrer = ArrayList<String>()
 private var sqlliste = ArrayList<String>()
-
+private var lehrerliste = lehrer()
 fun main(args: Array<String>) {
-
     val dir = File(System.getProperty("user.dir"))
     val sql = File("klassen.sql")
     val filewriter = FileWriter(sql)
@@ -32,6 +31,14 @@ fun main(args: Array<String>) {
                     line.contains("DESCRIPTION") -> {
                         klassen_und_lehrer.addAll(remove_spaces(return_everything_after_colon(line)))
                         lehrer = klassen_und_lehrer[klassen_und_lehrer.size - 1]
+                        if (lehrer!!.last() == '0') lehrer = lehrer!!.substring(0, lehrer!!.lastIndex)
+                        lehrerliste.forEach {
+                            var a = (it.substring(1, 4) + it.first()).toUpperCase()
+
+                            if (a == lehrer) {
+                                lehrer = it
+                            }
+                        }
                         i++
                     }
                     line.contains("SUMMARY") -> {
